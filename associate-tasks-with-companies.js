@@ -65,33 +65,14 @@ exports.main = async (event, callback) => {
     }
     console.log(inputs);
     
-    
-	const associations = { inputs };
-    
-	const apiResponseAssociations = await hubspotClient.apiRequest({
+    const associations = { inputs };
+    const apiResponseAssociations = await hubspotClient.apiRequest({
       method: 'POST',
       path: '/crm/v3/associations/task/company/batch/create', 
       body: associations,
 	})
    console.log(JSON.stringify(apiResponseAssociations.body, null, 2));
     
-    /*
-    //Define properties for update
-    const properties = {
-      "hs_task_status": "COMPLETED"
-    };
-    const patchobj = {
-      properties
-    };
-    
-	const apiPatchTaskByTaskId = await hubspotClient.apiRequest({
-      method: 'PATCH',
-      path: '/crm/v3/objects/tasks/' + taskid,
-      body: patchobj,
-	})
-    //console.log(JSON.stringify(apiPatchTaskByTaskId.body, null, 2));
-    
-    */
   } catch (e) {
     e.message === 'HTTP request failed'
       ? console.error(JSON.stringify(e.response, null, 2))
